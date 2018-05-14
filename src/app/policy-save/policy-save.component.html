@@ -1,0 +1,84 @@
+<mat-tab-group>
+  <mat-tab label="Basic Policy Example for Abeyance">
+
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form">
+          <mat-radio-group formControlName="status">
+            <mat-radio-button [value]="1">Save Status
+            </mat-radio-button>
+            <mat-radio-button [value]="100">Bound
+            </mat-radio-button>
+          </mat-radio-group>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Insured Name" formControlName="insured_name">
+            <mat-hint>Mandatory Field</mat-hint>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Vessel Name" formControlName="vessel_name">
+            <mat-hint>Optional Field</mat-hint>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Serial Number" formControlName="serial_no" (blur)="updateAbeyance('serial_no',form.controls['serial_no'])">
+            <mat-hint>Will Trigger Abeyance on Bind</mat-hint>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Model_no" formControlName="model_no" (blur)="updateAbeyance('model_no', form.controls['model_no'])">
+            <mat-hint>Will Trigger Abeyance on Bind</mat-hint>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+          <button mat-raised-button color="warn" (click)="bind()" [disabled]="form.invalid">Bind</button>
+        </form>
+        {{form.value | json}}
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div *ngIf="!abeyances.length">Abeyance</div>
+
+      <span *ngIf="abeyances.length" matBadge="{{abeyances.length}}" matBadgeOverlap="false" matBadgeColor="warn">Abeyances</span>
+
+    </ng-template>
+
+    <mat-card>Abeyances...
+
+      <form [formGroup]="form">
+
+        <div formArrayName="abeyances">
+          <div *ngFor="let abey of abeyances.controls;let i=index;">
+
+            <div [formGroupName]="i">
+              <p>{{abey.value.abeyance_reference}}</p>
+              <mat-form-field>
+                <input matInput formControlName="description" placeholder="Description">
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput formControlName="effective_to" placeholder="Effective To">
+              </mat-form-field>
+              <div formArrayName="notes">
+                <mat-form-field [formGroupName]="0">
+                  <input matInput formControlName="note" placeholder="Note">
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- <div *ngFor="let abey of form.controls['abeyances']">
+          <h1>Hello world</h1>
+        </div> -->
+      </form>
+
+
+      {{form.value | json }}
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
