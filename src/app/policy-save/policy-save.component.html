@@ -11,10 +11,11 @@
             </mat-radio-button>
           </mat-radio-group>
           <br>
-          <mat-form-field>
+          <app-insured-name [formGroup]="form"></app-insured-name>
+          <!-- <mat-form-field>
             <input matInput placeholder="Insured Name" formControlName="insured_name">
             <mat-hint>Mandatory Field</mat-hint>
-          </mat-form-field>
+          </mat-form-field> -->
           <br>
           <mat-form-field>
             <input matInput placeholder="Vessel Name" formControlName="vessel_name">
@@ -80,5 +81,28 @@
 
       {{form.value | json }}
     </mat-card>
+  </mat-tab>
+  <mat-tab label="notes">
+    <mat-card>
+      <ul>
+        <li>Will have to have a structure to properly validate when updating abeyances.</li>
+        <li>Need Strategy to link the abeyance to the transaction detail.</li>
+        <li>
+          thinking each property has a json with id, placeholder, mat-form-field. The form field will have all the validation placeholder
+          etc.
+        </li>
+        <li>
+          <ol>
+            <li>The connection will be with the id being the id from the Abeyance transaction attachement.</li>
+            <li>When inserting/updating attachment we create/update the abeyances and add the transaction attachment id to the
+              abeyance. not the uuid.</li>
+            <li>Theory. If Abeyance open up attachment and go to abeyance section.
+              <br> this only shows abeyances.
+              <br> on save update attachment and all abeyances.</li>
+          </ol>
+        </li>
+      </ul>
+    </mat-card>
+
   </mat-tab>
 </mat-tab-group>

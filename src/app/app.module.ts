@@ -25,13 +25,15 @@ import {
 import { PolicySaveComponent } from './policy-save/policy-save.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InsuredNameComponent } from './components/insured-name/insured-name.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AbeyanceNavComponent,
     PolicySaveComponent,
-    DashboardComponent
+    DashboardComponent,
+    InsuredNameComponent
   ],
   imports: [
     BrowserModule,
